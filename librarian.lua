@@ -1,5 +1,5 @@
-os.loadAPI("inventory.lua")
-os.loadAPI("dispatcher.lua")
+os.loadAPI("ComputerCraftEcoSystem/inventory.lua")
+os.loadAPI("ComputerCraftEcoSystem/head_librarian.lua")
 
 INVENTORY_SLOTS_START = 3
 INVENTORY_SLOTS_END = 16

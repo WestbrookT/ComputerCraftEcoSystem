@@ -1,4 +1,4 @@
-os.loadAPI("inventory.lua")
+os.loadAPI("ComputerCraftEcoSystem/inventory.lua")
 
 local pretty = require "cc.pretty"
 
@@ -221,5 +221,7 @@ function Dispatcher(return_chest_name, input_chest_name, output_chest_name)
     return dispatcher
 end
 
-head_librarian = Dispatcher("bottom", "front", "top")
-head_librarian:run()
+function main()
+    head_librarian = Dispatcher("bottom", "front", "top")
+    head_librarian:run()
+end
