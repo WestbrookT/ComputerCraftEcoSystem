@@ -9,9 +9,9 @@ expect(1, args[3], 'string')
 local treeUrl = 'https://api.github.com/repos/[USER]/[REPO]/git/trees/[BRANCH]?recursive=1'
 local rawFileUrl = 'https://raw.githubusercontent.com/[USER]/[REPO]/[BRANCH]/[PATH]'
 
-local user = westbrookt
-local repo = ComputerCraftEcoSystem
-local branch = main
+local user = "westbrookt"
+local repo = "ComputerCraftEcoSystem"
+local branch = "main"
 local localPath = shell.dir()
 
 treeUrl = treeUrl:gsub('%[USER]', user)
