@@ -370,5 +370,3 @@ function main()
         -- sleep(2)
     end
 end
-
-main()
