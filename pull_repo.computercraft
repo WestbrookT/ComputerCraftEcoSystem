@@ -1,2 +1,3 @@
+rm ComputerCraftEcoSystem
 wget https://raw.githubusercontent.com/Konijima/cc-git-clone/master/gitclone.lua
 gitclone westbrookt ComputerCraftEcoSystem main
