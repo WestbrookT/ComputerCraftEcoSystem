@@ -346,15 +346,15 @@ end
 function initialize_rednet()
     local modem = peripheral.find("modem")
     rednet.open(peripheral.getName(modem))
-    local head_librarian_id = rednet.lookup(dispatcher.DISPATCH_REQUEST_PROTOCOL, dispatcher.DISPATCHER_HOSTNAME) 
+    local head_librarian_id = rednet.lookup(head_librarian.DISPATCH_REQUEST_PROTOCOL, head_librarian.DISPATCHER_HOSTNAME) 
     print("head_librarian_id", head_librarian_id)
     return head_librarian_id
 end
 
 function get_orders(head_librarian_id)
-    rednet.send(head_librarian_id, nil, dispatcher.DISPATCH_REQUEST_PROTOCOL)
+    rednet.send(head_librarian_id, nil, head_librarian.DISPATCH_REQUEST_PROTOCOL)
     print("waiting...")
-    local _, selectors = rednet.receive(dispatcher.DISPATCH_RESPONSE_PROTOCOL, 5) 
+    local _, selectors = rednet.receive(head_librarian.DISPATCH_RESPONSE_PROTOCOL, 5) 
     print("Received order: ", textutils.serialise(selectors))
     return selectors
 end
