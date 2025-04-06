@@ -1,13 +1,5 @@
 os.loadAPI("ComputerCraftEcoSystem/inventory.lua")
 
-local pretty = require "cc.pretty"
-
-function pt(obj)
-  pretty.pretty_print(obj)
---   rep = pretty.pretty(obj)
---   textutils.pagedTabulate(rep)
-end
-
 --[[
 
 Chests:
