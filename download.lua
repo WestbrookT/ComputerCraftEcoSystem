@@ -2,10 +2,6 @@ local expect = dofile("rom/modules/main/cc/expect.lua").expect
 
 local args = {...}
 
-expect(1, args[1], 'string')
-expect(1, args[2], 'string')
-expect(1, args[3], 'string')
-
 local treeUrl = 'https://api.github.com/repos/[USER]/[REPO]/git/trees/[BRANCH]?recursive=1'
 local rawFileUrl = 'https://raw.githubusercontent.com/[USER]/[REPO]/[BRANCH]/[PATH]'
 
@@ -29,9 +25,6 @@ local function clone(files)
 
     local downloadedCount = 0
     for i=1, #files do
-        if string.sub(file[i].url, "download.lua") then
-           print("Skipping download file.")
-        else
             local function download()
                 local filePath = fs.combine(localRepoPath, files[i].path)
 
@@ -59,7 +52,6 @@ local function clone(files)
                 end
             end
             table.insert(processes, download)
-        end
     end
     parallel.waitForAll(table.unpack(processes))
 end
