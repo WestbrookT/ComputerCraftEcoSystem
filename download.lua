@@ -12,7 +12,7 @@ local rawFileUrl = 'https://raw.githubusercontent.com/[USER]/[REPO]/[BRANCH]/[PA
 local user = westbrookt
 local repo = ComputerCraftEcoSystem
 local branch = main
-local localPath = args[4] or shell.dir()
+local localPath = shell.dir()
 
 treeUrl = treeUrl:gsub('%[USER]', user)
 treeUrl = treeUrl:gsub('%[REPO]', repo)
@@ -29,33 +29,37 @@ local function clone(files)
 
     local downloadedCount = 0
     for i=1, #files do
-        local function download()
-            local filePath = fs.combine(localRepoPath, files[i].path)
+        if string.sub(file[i].url, "download.lua") then
+           print("Skipping download file.")
+        else
+            local function download()
+                local filePath = fs.combine(localRepoPath, files[i].path)
 
-            local request = http.get(files[i].url, nil, files[i].binary)
-            local content = request.readAll()
-            request.close()
+                local request = http.get(files[i].url, nil, files[i].binary)
+                local content = request.readAll()
+                request.close()
 
-            local mode = 'w'
-            if files[i].binary then
-                mode = 'wb'
+                local mode = 'w'
+                if files[i].binary then
+                    mode = 'wb'
+                end
+                
+                local writer = fs.open(filePath, mode)
+                writer.write(content)
+                writer.close()
+
+                term.setCursorPos(x, y)
+                term.clearLine()
+                downloadedCount = downloadedCount + 1
+                local progressText = 'Receiving files:  ' .. (downloadedCount / #files * 100) .. '% (' .. downloadedCount .. '/' .. #files .. ')'
+                if downloadedCount ~= #files then
+                    term.write(progressText)
+                else
+                    print(progressText)
+                end
             end
-            
-            local writer = fs.open(filePath, mode)
-            writer.write(content)
-            writer.close()
-
-            term.setCursorPos(x, y)
-            term.clearLine()
-            downloadedCount = downloadedCount + 1
-            local progressText = 'Receiving files:  ' .. (downloadedCount / #files * 100) .. '% (' .. downloadedCount .. '/' .. #files .. ')'
-            if downloadedCount ~= #files then
-                term.write(progressText)
-            else
-                print(progressText)
-            end
+            table.insert(processes, download)
         end
-        table.insert(processes, download)
     end
     parallel.waitForAll(table.unpack(processes))
 end
