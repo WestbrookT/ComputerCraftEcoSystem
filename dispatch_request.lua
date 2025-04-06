@@ -19,4 +19,4 @@ p(selectors)
 
 request.selectors = selectors
 
-rednet.broadcast(selectors, head_librarian.DISPATCH_REQUEST_PROTOCOL)
+rednet.broadcast(selectors, head_librarian.INVENTORY_REQUEST_PROTOCOL)
