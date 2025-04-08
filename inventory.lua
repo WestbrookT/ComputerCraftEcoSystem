@@ -316,8 +316,14 @@ function contains(inventory, selector, start_slot)
     end
     if type(inventory) == "string" then 
         inventory_wrapped = peripheral.wrap(inventory)
+    else
+        inventory_wrapped = inventory
     end
-    return find_slot(selector, start_slot, inventory_wrapped.size(), inventory_wrapped.getItemDetail)
+
+    for slot, item_data in pairs(inventory_wrapped) do
+        if match(selector, item_data) then
+            return slot
+    return -1
 end
 
 
