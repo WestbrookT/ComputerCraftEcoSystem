@@ -323,7 +323,9 @@ function contains(inventory, selector, start_slot)
     for slot, item_data in pairs(inventory_wrapped) do
         if match(selector, item_data) then
             return slot
-    return -1
+        end
+        return -1
+    end
 end
 
 
